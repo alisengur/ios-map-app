@@ -6,13 +6,13 @@
         <attribute name="subLocality" optional="YES" attributeType="String"/>
         <attribute name="thoroughFare" optional="YES" attributeType="String"/>
     </entity>
-    <entity name="Coordinate" representedClassName="Coordinate" syncable="YES" codeGenerationType="class">
-        <attribute name="addressName" optional="YES" attributeType="String"/>
+    <entity name="Location" representedClassName="Location" syncable="YES" codeGenerationType="class">
         <attribute name="latitude" optional="YES" attributeType="Double" defaultValueString="0.0" usesScalarValueType="YES"/>
+        <attribute name="locationName" optional="YES" attributeType="String"/>
         <attribute name="longitude" optional="YES" attributeType="Double" defaultValueString="0.0" usesScalarValueType="YES"/>
     </entity>
     <elements>
         <element name="Address" positionX="-63" positionY="-18" width="128" height="103"/>
-        <element name="Coordinate" positionX="-63" positionY="9" width="128" height="88"/>
+        <element name="Location" positionX="-63" positionY="9" width="128" height="88"/>
     </elements>
 </model>
