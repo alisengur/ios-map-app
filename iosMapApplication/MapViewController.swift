@@ -35,25 +35,40 @@ class MapViewController: UIViewController {
     var selectedLocation: UITextField?
     
     
+    let locationManager = CLLocationManager()
+    
     
     
     
     override func viewDidLoad() {
         super.viewDidLoad()
         self.mapView.delegate = self
+        //self.mapView.showsUserLocation = true
         if location != nil {
             confirmButton.isHidden = true
         }
         
+        checkLocationServices()
+        
+        
+        
     }
     
     
-    
-    
-    
-    func mapView(_ mapView: MKMapView, viewFor annotation: MKAnnotation) -> MKAnnotationView? {
-        return nil
+    func setupLocationManager() {
+        locationManager.delegate = self
+        locationManager.desiredAccuracy = kCLLocationAccuracyBest  // The best level of accuracy available
     }
+    
+    
+    func centerViewOnUserLocation() {
+        if let location = locationManager.location?.coordinate {
+            let region = MKCoordinateRegion(center: location, latitudinalMeters: 10000, longitudinalMeters: 10000)
+            mapView.setRegion(region, animated: true)
+        }
+    }
+    
+    
     
     
     
@@ -107,9 +122,44 @@ class MapViewController: UIViewController {
     @objc func hideKeyboard(){
         view.endEditing(true)
     }
+    
+    
+    
+    func checkLocationServices() {
+        if CLLocationManager.locationServicesEnabled() {   // checks location services is enabled.
+            setupLocationManager()
+            checkLocationAuthorization()
+            
+        } else {
+            // show alert letting the user know they have to turn this on.
+        }
+    }
+    
+    
+    func checkLocationAuthorization() {
+        switch CLLocationManager.authorizationStatus() {
+        case .authorizedWhenInUse: // app can use all location services and receive events while the app is in use.
+            mapView.showsUserLocation = true
+            centerViewOnUserLocation()  // set region
+            break
+        case .denied:
+            // Show alert instructing them how to turn on permission.
+            break
+        case .notDetermined:
+            locationManager.requestWhenInUseAuthorization()
+        case .restricted:
+            break
+        case .authorizedAlways: //app can use all location services and receive events even if the user is not aware that your app is running
+            break
+        
+
+    }
+    
+    
+    
 }
 
-
+}
 
 
 extension MapViewController: MKMapViewDelegate {
@@ -125,3 +175,19 @@ extension MapViewController: MKMapViewDelegate {
         }
     }
 }
+
+
+
+
+extension MapViewController: CLLocationManagerDelegate {
+    
+    func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) { //Tells the delegate that new location data is available.  ** Every time the user location updates, it is returning an array of CLLocation. We are adjusting the map view, user is in the center and then we adjust the map view accordingly.
+       
+       let location = locations.last! as CLLocation
+       let currentLocation = location.coordinate
+       let coordinateRegion = MKCoordinateRegion(center: currentLocation, latitudinalMeters: 800, longitudinalMeters: 800)
+       mapView.setRegion(coordinateRegion, animated: true)
+    }
+    
+}
+
