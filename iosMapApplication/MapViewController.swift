@@ -43,7 +43,6 @@ class MapViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         self.mapView.delegate = self
-        //self.mapView.showsUserLocation = true
         if location != nil {
             confirmButton.isHidden = true
         }
