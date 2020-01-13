@@ -125,5 +125,48 @@ class LocationViewController: UIViewController, UITableViewDelegate, UITableView
         
     }
     
-}
+    
+    
+    
+    
+        func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
+            if editingStyle == .delete {  // swipe to delete
+    
+              let appDelegate = UIApplication.shared.delegate as! AppDelegate
+              let context = appDelegate.persistentContainer.viewContext
+    
+              let fetchRequest = NSFetchRequest<NSFetchRequestResult>(entityName: "Location")
+                fetchRequest.predicate = NSPredicate(format: "locationName==%@", locationNameArray[indexPath.row])
+                // fetch locations
+    
+              do {
+                  let results = try context.fetch(fetchRequest)
+                  if results.count > 0 {
+    
+                      for result in results as! [NSManagedObject] {
+                          if let location = result.value(forKey: "locationName") as? String {
+                              if location == locationNameArray[indexPath.row] { // if location is equal selected index of locationNameArray
+                                
+                                  context.delete(result)
+                                  locationNameArray.remove(at: indexPath.row)
+                                  self.tableView.reloadData()
+    
+                                  do {
+                                      try context.save()
+                                  } catch {
+                                      print("error")
+                                  }
+    
+                                  break
+    
+                              }
+                          }
+                      }
+                  }
+              } catch {
+                      print("error")
+              }
+          }
+    }
 
+}

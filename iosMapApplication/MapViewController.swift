@@ -80,7 +80,8 @@ class MapViewController: UIViewController {
                     textField.placeholder = "enter the title of the location"
                 })       //Add text field
         let saveAction = UIAlertAction(title: "Save", style: UIAlertAction.Style.default) { (_) in
-            if let titleText = alert.textFields?[0].text {
+            
+            if let titleText = alert.textFields?[0].text { 
                 self.saveLocationToCoreData(location: titleText, latitude: coordinate.latitude, longitude: coordinate.longitude)    // getting the text and sending to saveLocationWithCoreData function.
             }
             
