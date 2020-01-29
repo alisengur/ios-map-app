@@ -10,7 +10,7 @@ import UIKit
 import MapKit
 import CoreData
 
-class LocationViewController: UIViewController, UITableViewDelegate, UITableViewDataSource{
+class LocationViewController: UIViewController{
     
     
     @IBOutlet weak var tableView: UITableView!
@@ -91,7 +91,12 @@ class LocationViewController: UIViewController, UITableViewDelegate, UITableView
     
     
     
-    
+}
+
+
+
+//MARK: -LocationViewController
+extension LocationViewController: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return locationNameArray.count
@@ -111,11 +116,6 @@ class LocationViewController: UIViewController, UITableViewDelegate, UITableView
     }
     
     
-
-    
-    
-    
-    
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let coord = CLLocationCoordinate2D(latitude: latitudeArray[indexPath.row], longitude: longitudeArray[indexPath.row])  /// gets coordinates from selected row.
         if let vc = self.storyboard?.instantiateViewController(withIdentifier: "MapViewController") as? MapViewController {
@@ -127,9 +127,7 @@ class LocationViewController: UIViewController, UITableViewDelegate, UITableView
     
     
     
-    
-    
-        func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
+    func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
             if editingStyle == .delete {  /// swipe to delete
     
               let appDelegate = UIApplication.shared.delegate as! AppDelegate
@@ -168,5 +166,5 @@ class LocationViewController: UIViewController, UITableViewDelegate, UITableView
               }
           }
     }
-
+    
 }
