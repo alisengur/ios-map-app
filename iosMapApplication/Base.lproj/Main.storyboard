@@ -115,6 +115,7 @@
                     <connections>
                         <outlet property="confirmButton" destination="2bF-0N-lCe" id="FaM-wy-aWc"/>
                         <outlet property="mapView" destination="qs7-xz-nsG" id="nSV-Cx-b6g"/>
+                        <outlet property="segmentControl" destination="iNR-aU-D14" id="G8V-gj-kpj"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="fQi-6V-LGg" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>

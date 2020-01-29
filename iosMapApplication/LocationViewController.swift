@@ -59,7 +59,7 @@ class LocationViewController: UIViewController, UITableViewDelegate, UITableView
         do {
             let results = try context.fetch(fetchRequest)
             
-            for result in results as! [NSManagedObject] {   // gets data from Location entity
+            for result in results as! [NSManagedObject] {   /// gets data from Location entity
                 if let addressName = result.value(forKey: "locationName") as? String {
                     self.locationNameArray.append(addressName)   
                 }
@@ -117,10 +117,10 @@ class LocationViewController: UIViewController, UITableViewDelegate, UITableView
     
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        let coord = CLLocationCoordinate2D(latitude: latitudeArray[indexPath.row], longitude: longitudeArray[indexPath.row])  // gets coordinates from selected row.
+        let coord = CLLocationCoordinate2D(latitude: latitudeArray[indexPath.row], longitude: longitudeArray[indexPath.row])  /// gets coordinates from selected row.
         if let vc = self.storyboard?.instantiateViewController(withIdentifier: "MapViewController") as? MapViewController {
             vc.location = coord
-            self.navigationController?.pushViewController(vc, animated: true)   // sends coordinates to MapViewController.
+            self.navigationController?.pushViewController(vc, animated: true)   /// sends coordinates to MapViewController.
         }
         
     }
@@ -130,14 +130,14 @@ class LocationViewController: UIViewController, UITableViewDelegate, UITableView
     
     
         func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
-            if editingStyle == .delete {  // swipe to delete
+            if editingStyle == .delete {  /// swipe to delete
     
               let appDelegate = UIApplication.shared.delegate as! AppDelegate
               let context = appDelegate.persistentContainer.viewContext
     
               let fetchRequest = NSFetchRequest<NSFetchRequestResult>(entityName: "Location")
                 fetchRequest.predicate = NSPredicate(format: "locationName==%@", locationNameArray[indexPath.row])
-                // fetch locations
+                /// fetch locations
     
               do {
                   let results = try context.fetch(fetchRequest)
@@ -145,7 +145,7 @@ class LocationViewController: UIViewController, UITableViewDelegate, UITableView
     
                       for result in results as! [NSManagedObject] {
                           if let location = result.value(forKey: "locationName") as? String {
-                              if location == locationNameArray[indexPath.row] { // if location is equal selected index of locationNameArray
+                              if location == locationNameArray[indexPath.row] { /// if location is equal selected index of locationNameArray
                                 
                                   context.delete(result)
                                   locationNameArray.remove(at: indexPath.row)

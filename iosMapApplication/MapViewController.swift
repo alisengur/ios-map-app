@@ -14,9 +14,10 @@ import CoreLocation
 
 class MapViewController: UIViewController {
 
+    //MARK: -Outlets
     @IBOutlet weak var mapView: MKMapView!
-    
-    
+    @IBOutlet weak var confirmButton: UIButton!
+    @IBOutlet weak var segmentControl: UISegmentedControl!
     @IBAction func changeMapType(_ sender: UISegmentedControl) {
         
         if sender.selectedSegmentIndex == 0 {
@@ -27,14 +28,12 @@ class MapViewController: UIViewController {
     }
     
     
-    @IBOutlet weak var confirmButton: UIButton!
+
     
-    
+    //MARK: -Properties
     var location: CLLocationCoordinate2D?
     var willAddNewAnnotation: Bool = false
     var selectedLocation: UITextField?
-    
-    
     let locationManager = CLLocationManager()
     
     
@@ -46,18 +45,23 @@ class MapViewController: UIViewController {
         if location != nil {
             confirmButton.isHidden = true
         }
-        
         checkLocationServices()
-        
-        
-        
     }
+    
+    
+    
+    
+    override func viewWillAppear(_ animated: Bool) {
+        self.segmentControl.selectedSegmentIndex = 0
+    }
+    
     
     
     func setupLocationManager() {
         locationManager.delegate = self
         locationManager.desiredAccuracy = kCLLocationAccuracyBest  // The best level of accuracy available
     }
+    
     
     
     func centerViewOnUserLocation() {
@@ -71,24 +75,26 @@ class MapViewController: UIViewController {
     
     
     
-    
+    //MARK: -Actions
     @IBAction func confirmButtonClicked(_ sender: UIButton) {
         let coordinate = self.mapView.convert(self.view.center, toCoordinateFrom: self.mapView)
         print(coordinate)
-        let alert = UIAlertController(title: "Are you sure to save?", message: nil, preferredStyle: UIAlertController.Style.alert)   // creating the alert
-        alert.addTextField(configurationHandler: { (textField:UITextField)->Void  in    // inserting text field to alertview.
+        let alert = UIAlertController(title: "Are you sure to save?", message: nil, preferredStyle: UIAlertController.Style.alert)   /// creates the alert
+        alert.addTextField(configurationHandler: { (textField:UITextField)->Void  in    /// inserts text field to alertview.
                     textField.placeholder = "enter the title of the location"
-                })       //Add text field
+                })
         let saveAction = UIAlertAction(title: "Save", style: UIAlertAction.Style.default) { (_) in
             
-            if let titleText = alert.textFields?[0].text { 
-                self.saveLocationToCoreData(location: titleText, latitude: coordinate.latitude, longitude: coordinate.longitude)    // getting the text and sending to saveLocationWithCoreData function.
+            if let titleText = alert.textFields?[0].text, !titleText.isEmpty {
+                self.saveLocationToCoreData(location: titleText, latitude: coordinate.latitude, longitude: coordinate.longitude)    /// gets the text and sends to saveLocationWithCoreData function.
+            } else {
+                print("Title can not blank.")
             }
             
         }
         alert.addAction(saveAction)
-        alert.addAction(UIAlertAction(title: "Cancel", style: UIAlertAction.Style.cancel, handler: nil))   // adding the actions
-        self.present(alert, animated: true, completion: nil)    // showing the alert
+        alert.addAction(UIAlertAction(title: "Cancel", style: UIAlertAction.Style.cancel, handler: nil))
+        self.present(alert, animated: true, completion: nil)    /// shows the alert
         
     }
     
@@ -103,7 +109,7 @@ class MapViewController: UIViewController {
         newLocation.setValue(latitude, forKey: "latitude")
         newLocation.setValue(longitude, forKey: "longitude")
         do {
-            try context.save()  // saving the name, latitude and longitude
+            try context.save()
             print("successful")
         } catch {
             print("failed")
@@ -115,10 +121,6 @@ class MapViewController: UIViewController {
     
     
     
-    
-    
-    
-    
     @objc func hideKeyboard(){
         view.endEditing(true)
     }
@@ -126,30 +128,27 @@ class MapViewController: UIViewController {
     
     
     func checkLocationServices() {
-        if CLLocationManager.locationServicesEnabled() {   // checks location services is enabled.
+        if CLLocationManager.locationServicesEnabled() {   /// checks location services is enabled.
             setupLocationManager()
             checkLocationAuthorization()
             
-        } else {
-            // show alert letting the user know they have to turn this on.
         }
     }
     
     
     func checkLocationAuthorization() {
         switch CLLocationManager.authorizationStatus() {
-        case .authorizedWhenInUse: // app can use all location services and receive events while the app is in use.
+        case .authorizedWhenInUse: /// app can use all location services and receive events while the app is in use.
             mapView.showsUserLocation = true
-            centerViewOnUserLocation()  // set region
+            centerViewOnUserLocation()  /// set region
             break
         case .denied:
-            // Show alert instructing them how to turn on permission.
             break
         case .notDetermined:
             locationManager.requestWhenInUseAuthorization()
         case .restricted:
             break
-        case .authorizedAlways: //app can use all location services and receive events even if the user is not aware that your app is running
+        case .authorizedAlways: ///app can use all location services and receive events even if the user is not aware that your app is running
             break
         
 
@@ -165,8 +164,8 @@ class MapViewController: UIViewController {
 extension MapViewController: MKMapViewDelegate {
 
     
-    func mapViewDidFinishLoadingMap(_ mapView: MKMapView) {  // it works when map loaded.
-        if let center = location {  // if location variable exist, setRegion works.
+    func mapViewDidFinishLoadingMap(_ mapView: MKMapView) {  /// it works when map loaded.
+        if let center = location {  /// if location variable exist, setRegion works.
             let regionRadius: CLLocationDistance = 1000.0
             let region = MKCoordinateRegion(center: center, latitudinalMeters: regionRadius , longitudinalMeters: regionRadius)
             self.mapView.setRegion(region, animated: true)
