@@ -59,7 +59,7 @@ class LocationViewController: UIViewController{
         do {
             let results = try context.fetch(fetchRequest)
             
-            for result in results as! [NSManagedObject] {   /// gets data from Location entity
+            for result in results as! [NSManagedObject] {   /// get data from Location entity
                 if let addressName = result.value(forKey: "locationName") as? String {
                     self.locationNameArray.append(addressName)   
                 }

@@ -59,7 +59,7 @@ class MapViewController: UIViewController {
     
     func setupLocationManager() {
         locationManager.delegate = self
-        locationManager.desiredAccuracy = kCLLocationAccuracyBest  // The best level of accuracy available
+        locationManager.desiredAccuracy = kCLLocationAccuracyBest  // The best level of accuracy available.
     }
     
     
@@ -86,7 +86,7 @@ class MapViewController: UIViewController {
         let saveAction = UIAlertAction(title: "Save", style: UIAlertAction.Style.default) { (_) in
             
             if let titleText = alert.textFields?[0].text, !titleText.isEmpty {
-                self.saveLocationToCoreData(location: titleText, latitude: coordinate.latitude, longitude: coordinate.longitude)    /// gets the text and sends to saveLocationWithCoreData function.
+                self.saveLocationToCoreData(location: titleText, latitude: coordinate.latitude, longitude: coordinate.longitude)    // gets the location title, latitude and longitude of the location, sends to                            "saveLocationWithCoreData" function.
             } else {
                 print("Title can not blank.")
             }
@@ -165,7 +165,7 @@ extension MapViewController: MKMapViewDelegate {
 
     
     func mapViewDidFinishLoadingMap(_ mapView: MKMapView) {  /// it works when map loaded.
-        if let center = location {  /// if location variable exist, setRegion works.
+        if let center = location {  /// if location variable exist, setRegion is working.
             let regionRadius: CLLocationDistance = 1000.0
             let region = MKCoordinateRegion(center: center, latitudinalMeters: regionRadius , longitudinalMeters: regionRadius)
             self.mapView.setRegion(region, animated: true)
