@@ -1,6 +1,6 @@
 # iOS Map Application
 
-A simple ios map application that takes user location, also can select and save different locations. 
+A simple ios map application that takes user location, selects and saves different locations. 
 
 ## The following were used when developing the app
 - MapKit
