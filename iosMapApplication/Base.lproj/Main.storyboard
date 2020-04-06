@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="15702" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="NTx-pT-UZ5">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="15705" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="NTx-pT-UZ5">
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="15704"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="15706"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -18,16 +18,6 @@
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="nWh-Po-l9U">
                                 <rect key="frame" x="0.0" y="88" width="414" height="774"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
-                                <prototypes>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" accessoryType="detailDisclosureButton" indentationWidth="10" reuseIdentifier="tableViewItem" id="4LQ-at-qXW">
-                                        <rect key="frame" x="0.0" y="28" width="414" height="43.5"/>
-                                        <autoresizingMask key="autoresizingMask"/>
-                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="4LQ-at-qXW" id="pWO-Dp-lJw">
-                                            <rect key="frame" x="0.0" y="0.0" width="351" height="43.5"/>
-                                            <autoresizingMask key="autoresizingMask"/>
-                                        </tableViewCellContentView>
-                                    </tableViewCell>
-                                </prototypes>
                             </tableView>
                         </subviews>
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
@@ -80,8 +70,8 @@
                                     <constraint firstAttribute="width" constant="80" id="VR2-jm-7er"/>
                                 </constraints>
                             </imageView>
-                            <segmentedControl opaque="NO" contentMode="scaleToFill" selected="YES" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="bar" selectedSegmentIndex="1" translatesAutoresizingMaskIntoConstraints="NO" id="iNR-aU-D14">
-                                <rect key="frame" x="142" y="54" width="130" height="32"/>
+                            <segmentedControl opaque="NO" contentMode="scaleToFill" selected="YES" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="1" translatesAutoresizingMaskIntoConstraints="NO" id="iNR-aU-D14">
+                                <rect key="frame" x="134.5" y="54" width="145" height="32"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <segments>
                                     <segment title="Standart"/>
@@ -98,10 +88,12 @@
                         <constraints>
                             <constraint firstItem="iNR-aU-D14" firstAttribute="centerX" secondItem="s3s-Eh-9KW" secondAttribute="centerX" id="82j-2V-bPZ"/>
                             <constraint firstItem="E1U-Nl-3K7" firstAttribute="bottom" secondItem="2bF-0N-lCe" secondAttribute="bottom" constant="37" id="9Vb-a0-8k8"/>
-                            <constraint firstItem="qs7-xz-nsG" firstAttribute="top" secondItem="V8V-IM-NNN" secondAttribute="topMargin" constant="-44" id="AAY-bi-iCt"/>
-                            <constraint firstItem="iNR-aU-D14" firstAttribute="leading" secondItem="E1U-Nl-3K7" secondAttribute="leading" constant="142" id="P8Y-p8-KiX"/>
+                            <constraint firstAttribute="bottom" secondItem="qs7-xz-nsG" secondAttribute="bottom" id="Qbm-Ny-JEa"/>
+                            <constraint firstItem="qs7-xz-nsG" firstAttribute="trailing" secondItem="E1U-Nl-3K7" secondAttribute="trailing" id="U39-pV-x3S"/>
                             <constraint firstItem="s3s-Eh-9KW" firstAttribute="centerX" secondItem="2bF-0N-lCe" secondAttribute="centerX" id="Xei-xS-pnf"/>
+                            <constraint firstItem="qs7-xz-nsG" firstAttribute="leading" secondItem="E1U-Nl-3K7" secondAttribute="leading" id="Z7D-Xf-piS"/>
                             <constraint firstItem="s3s-Eh-9KW" firstAttribute="centerX" secondItem="qs7-xz-nsG" secondAttribute="centerX" id="d2I-fX-Yzg"/>
+                            <constraint firstItem="E1U-Nl-3K7" firstAttribute="top" secondItem="qs7-xz-nsG" secondAttribute="top" constant="44" id="d45-Ke-yev"/>
                             <constraint firstItem="iNR-aU-D14" firstAttribute="top" secondItem="E1U-Nl-3K7" secondAttribute="top" constant="10" id="dli-FQ-htY"/>
                             <constraint firstItem="2bF-0N-lCe" firstAttribute="leading" secondItem="E1U-Nl-3K7" secondAttribute="leading" constant="107" id="eIb-bA-reb"/>
                             <constraint firstItem="s3s-Eh-9KW" firstAttribute="centerY" secondItem="qs7-xz-nsG" secondAttribute="centerY" id="fQ9-R4-RxA"/>
@@ -121,7 +113,7 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="fQi-6V-LGg" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
                 <pongPressGestureRecognizer allowableMovement="10" minimumPressDuration="0.5" id="2UZ-PW-cWv"/>
             </objects>
-            <point key="canvasLocation" x="1747.826086956522" y="129.91071428571428"/>
+            <point key="canvasLocation" x="1864" y="130"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="sxN-uV-3uv">

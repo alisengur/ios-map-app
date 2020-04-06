@@ -42,6 +42,8 @@ class MapViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         self.mapView.delegate = self
+        segmentControl.setTitleTextAttributes([NSAttributedString.Key.foregroundColor: UIColor.link], for: .normal)
+        segmentControl.setTitleTextAttributes([NSAttributedString.Key.foregroundColor: UIColor.white], for: .selected)
         if location != nil {
             confirmButton.isHidden = true
         }
@@ -80,13 +82,21 @@ class MapViewController: UIViewController {
         let coordinate = self.mapView.convert(self.view.center, toCoordinateFrom: self.mapView)
         print(coordinate)
         let alert = UIAlertController(title: "Are you sure to save?", message: nil, preferredStyle: UIAlertController.Style.alert)   /// creates the alert
+        
         alert.addTextField(configurationHandler: { (textField:UITextField)->Void  in    /// inserts text field to alertview.
                     textField.placeholder = "enter the title of the location"
                 })
+        alert.addTextField(configurationHandler: {(textField:UITextField)->Void in
+            textField.placeholder = "enter the city name"
+        })
+        alert.addTextField(configurationHandler: {(textField:UITextField)->Void in
+            textField.placeholder = "enter the country name"
+        })
+        
         let saveAction = UIAlertAction(title: "Save", style: UIAlertAction.Style.default) { (_) in
             
-            if let titleText = alert.textFields?[0].text, !titleText.isEmpty {
-                self.saveLocationToCoreData(location: titleText, latitude: coordinate.latitude, longitude: coordinate.longitude)    // gets the location title, latitude and longitude of the location, sends to                            "saveLocationWithCoreData" function.
+            if let titleText = alert.textFields?[0].text, !titleText.isEmpty, let cityName = alert.textFields?[1].text, !cityName.isEmpty, let countryName = alert.textFields?[2].text, !countryName.isEmpty {
+                self.saveLocationToCoreData(location: titleText, cityName: cityName, countryName: countryName, latitude: coordinate.latitude, longitude: coordinate.longitude)    // gets the location title, latitude and longitude of the location, sends to                            "saveLocationWithCoreData" function.
             } else {
                 print("Title can not blank.")
             }
@@ -101,13 +111,15 @@ class MapViewController: UIViewController {
     
     
     
-    func saveLocationToCoreData(location: String, latitude: Double, longitude: Double) {
+    func saveLocationToCoreData(location: String, cityName: String, countryName: String, latitude: Double, longitude: Double) {
         let appDelegate = UIApplication.shared.delegate as! AppDelegate
         let context = appDelegate.persistentContainer.viewContext
         let newLocation = NSEntityDescription.insertNewObject(forEntityName: "Location", into: context)
         newLocation.setValue(location, forKey: "locationName")
         newLocation.setValue(latitude, forKey: "latitude")
         newLocation.setValue(longitude, forKey: "longitude")
+        newLocation.setValue(cityName, forKey: "cityName")
+        newLocation.setValue(countryName, forKey: "countryName")
         do {
             try context.save()
             print("successful")

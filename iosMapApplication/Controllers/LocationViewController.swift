@@ -17,6 +17,8 @@ class LocationViewController: UIViewController{
 
 
     var locationNameArray = [String]()
+    var cityNameArray = [String]()
+    var countryNameArray = [String]()
     var latitudeArray = [Double]()
     var longitudeArray = [Double]()
     
@@ -27,14 +29,21 @@ class LocationViewController: UIViewController{
         super.viewDidLoad()
         tableView.delegate = self
         tableView.dataSource = self
-        
+        tableView.allowsSelection = true
+        setTableView()
         navigationController?.navigationBar.prefersLargeTitles = true
-        navigationController?.navigationBar.topItem?.rightBarButtonItem = UIBarButtonItem(title: "Create", style: .plain, target: self, action: #selector(createButtonClicked))
+        navigationController?.navigationBar.topItem?.rightBarButtonItem = UIBarButtonItem(title: "New Location", style: .plain, target: self, action: #selector(createButtonClicked))
         
         getData()
     }
     
     
+    fileprivate func setTableView() {
+        let tableViewCellNib = UINib(nibName: "LocationTableViewCell", bundle: nil)
+        tableView.delegate = self
+        tableView.dataSource = self
+        tableView.register(tableViewCellNib, forCellReuseIdentifier: "LocationTableViewCell")        
+    }
     
     
     
@@ -62,6 +71,14 @@ class LocationViewController: UIViewController{
             for result in results as! [NSManagedObject] {   /// get data from Location entity
                 if let addressName = result.value(forKey: "locationName") as? String {
                     self.locationNameArray.append(addressName)   
+                }
+                
+                if let cityName = result.value(forKey: "cityName") as? String {
+                    self.cityNameArray.append(cityName)
+                }
+                
+                if let countryName = result.value(forKey: "countryName") as? String {
+                    self.countryNameArray.append(countryName)
                 }
                 
                 if let latitude = result.value(forKey: "latitude") as? Double {
@@ -106,24 +123,23 @@ extension LocationViewController: UITableViewDelegate, UITableViewDataSource {
     
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "tableViewItem", for: indexPath)
-        if !locationNameArray[indexPath.row].isEmpty {
-            cell.textLabel?.text = "\(locationNameArray[indexPath.row])"
+        let cell = tableView.dequeueReusableCell(withIdentifier: "LocationTableViewCell", for: indexPath) as! LocationTableViewCell
+        cell.delegate = self
+        cell.index = indexPath
+        if !locationNameArray[indexPath.row].isEmpty && !cityNameArray[indexPath.row].isEmpty && !countryNameArray[indexPath.row].isEmpty {
+            cell.locationNameLabel?.text = "\(locationNameArray[indexPath.row])"
+            cell.cityNameLabel.text = "\(cityNameArray[indexPath.row])"
+            cell.countryNameLabel.text = "\(countryNameArray[indexPath.row])"
         } else {
-            cell.textLabel?.text = ""
+            cell.locationNameLabel?.text = ""
+            cell.cityNameLabel.text = ""
+            cell.countryNameLabel.text = ""
         }
+ 
         return cell
     }
     
     
-    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        let coord = CLLocationCoordinate2D(latitude: latitudeArray[indexPath.row], longitude: longitudeArray[indexPath.row])  /// gets coordinates from selected row.
-        if let vc = self.storyboard?.instantiateViewController(withIdentifier: "MapViewController") as? MapViewController {
-            vc.location = coord
-            self.navigationController?.pushViewController(vc, animated: true)   /// sends coordinates to MapViewController.
-        }
-        
-    }
     
     
     
@@ -147,6 +163,8 @@ extension LocationViewController: UITableViewDelegate, UITableViewDataSource {
                                 
                                   context.delete(result)
                                   locationNameArray.remove(at: indexPath.row)
+                                  self.cityNameArray.remove(at: indexPath.row)
+                                  self.countryNameArray.remove(at: indexPath.row)
                                   self.tableView.reloadData()
     
                                   do {
@@ -166,5 +184,19 @@ extension LocationViewController: UITableViewDelegate, UITableViewDataSource {
               }
           }
     }
+}
+
+
+extension LocationViewController: LocationCellDelegate {
+    func didTappedViewButton(index: Int) {
+        let coord = CLLocationCoordinate2D(latitude: latitudeArray[index], longitude: longitudeArray[index])  /// gets coordinates from selected row.
+        let mainStoryBoard = UIStoryboard(name: "Main", bundle: Bundle.main)
+        if let vc = mainStoryBoard.instantiateViewController(withIdentifier: "MapViewController") as? MapViewController {
+            vc.location = coord
+            self.navigationController?.pushViewController(vc, animated: true)   /// sends coordinates to MapViewController.
+        }
+        print("tapped")
+    }
+    
     
 }

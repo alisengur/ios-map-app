@@ -7,24 +7,26 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		2242C6BF243945C200FA757A /* LocationTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2242C6BE243945C200FA757A /* LocationTableViewCell.swift */; };
+		2242C6C32439507B00FA757A /* LocationTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2242C6C12439507B00FA757A /* LocationTableViewCell.xib */; };
 		22558AFC23C3389700C0B6C9 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22558AFB23C3389700C0B6C9 /* AppDelegate.swift */; };
 		22558AFE23C3389700C0B6C9 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22558AFD23C3389700C0B6C9 /* SceneDelegate.swift */; };
 		22558B0323C3389700C0B6C9 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 22558B0123C3389700C0B6C9 /* Main.storyboard */; };
 		22558B0623C3389700C0B6C9 /* iosMapApplication.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 22558B0423C3389700C0B6C9 /* iosMapApplication.xcdatamodeld */; };
 		22558B0823C338A300C0B6C9 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 22558B0723C338A300C0B6C9 /* Assets.xcassets */; };
-		22558B0B23C338A300C0B6C9 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 22558B0923C338A300C0B6C9 /* LaunchScreen.storyboard */; };
 		22558B1323C342BD00C0B6C9 /* MapViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22558B1223C342BD00C0B6C9 /* MapViewController.swift */; };
 		225EAC7823CB98A500DD07AF /* LocationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 225EAC7723CB98A500DD07AF /* LocationViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		2242C6BE243945C200FA757A /* LocationTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationTableViewCell.swift; sourceTree = "<group>"; };
+		2242C6C12439507B00FA757A /* LocationTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = LocationTableViewCell.xib; sourceTree = "<group>"; };
 		22558AF823C3389700C0B6C9 /* iosMapApplication.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = iosMapApplication.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		22558AFB23C3389700C0B6C9 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		22558AFD23C3389700C0B6C9 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
 		22558B0223C3389700C0B6C9 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		22558B0523C3389700C0B6C9 /* iosMapApplication.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = iosMapApplication.xcdatamodel; sourceTree = "<group>"; };
 		22558B0723C338A300C0B6C9 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
-		22558B0A23C338A300C0B6C9 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		22558B0C23C338A300C0B6C9 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		22558B1223C342BD00C0B6C9 /* MapViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapViewController.swift; sourceTree = "<group>"; };
 		225EAC7723CB98A500DD07AF /* LocationViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LocationViewController.swift; sourceTree = "<group>"; };
@@ -41,6 +43,24 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		222A956B243B346700A38EBC /* Controllers */ = {
+			isa = PBXGroup;
+			children = (
+				225EAC7723CB98A500DD07AF /* LocationViewController.swift */,
+				22558B1223C342BD00C0B6C9 /* MapViewController.swift */,
+			);
+			path = Controllers;
+			sourceTree = "<group>";
+		};
+		222A956C243B349900A38EBC /* Cells */ = {
+			isa = PBXGroup;
+			children = (
+				2242C6BE243945C200FA757A /* LocationTableViewCell.swift */,
+				2242C6C12439507B00FA757A /* LocationTableViewCell.xib */,
+			);
+			name = Cells;
+			sourceTree = "<group>";
+		};
 		22558AEF23C3389700C0B6C9 = {
 			isa = PBXGroup;
 			children = (
@@ -62,11 +82,10 @@
 			children = (
 				22558AFB23C3389700C0B6C9 /* AppDelegate.swift */,
 				22558AFD23C3389700C0B6C9 /* SceneDelegate.swift */,
-				225EAC7723CB98A500DD07AF /* LocationViewController.swift */,
+				222A956B243B346700A38EBC /* Controllers */,
 				22558B0123C3389700C0B6C9 /* Main.storyboard */,
-				22558B1223C342BD00C0B6C9 /* MapViewController.swift */,
+				222A956C243B349900A38EBC /* Cells */,
 				22558B0723C338A300C0B6C9 /* Assets.xcassets */,
-				22558B0923C338A300C0B6C9 /* LaunchScreen.storyboard */,
 				22558B0C23C338A300C0B6C9 /* Info.plist */,
 				22558B0423C3389700C0B6C9 /* iosMapApplication.xcdatamodeld */,
 			);
@@ -131,7 +150,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				22558B0B23C338A300C0B6C9 /* LaunchScreen.storyboard in Resources */,
+				2242C6C32439507B00FA757A /* LocationTableViewCell.xib in Resources */,
 				22558B0823C338A300C0B6C9 /* Assets.xcassets in Resources */,
 				22558B0323C3389700C0B6C9 /* Main.storyboard in Resources */,
 			);
@@ -144,6 +163,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				2242C6BF243945C200FA757A /* LocationTableViewCell.swift in Sources */,
 				22558AFC23C3389700C0B6C9 /* AppDelegate.swift in Sources */,
 				22558AFE23C3389700C0B6C9 /* SceneDelegate.swift in Sources */,
 				225EAC7823CB98A500DD07AF /* LocationViewController.swift in Sources */,
@@ -161,14 +181,6 @@
 				22558B0223C3389700C0B6C9 /* Base */,
 			);
 			name = Main.storyboard;
-			sourceTree = "<group>";
-		};
-		22558B0923C338A300C0B6C9 /* LaunchScreen.storyboard */ = {
-			isa = PBXVariantGroup;
-			children = (
-				22558B0A23C338A300C0B6C9 /* Base */,
-			);
-			name = LaunchScreen.storyboard;
 			sourceTree = "<group>";
 		};
 /* End PBXVariantGroup section */
